@@ -22,6 +22,15 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('http')) {
+      shell.openExternal(url);
+      return { action: 'deny' };
+    }
+  
+    return { action: 'allow' };
+  });
 };
 
 // This method will be called when Electron has finished
@@ -46,5 +55,4 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.handle('open-in-browser', (_, url) => shell.openExternal(url));
 
