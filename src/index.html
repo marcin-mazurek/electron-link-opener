@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+    <script>
+    // Add an event listener for all anchor tags with an href attribute
+    document.addEventListener('click', (event) => {
+      if (event.target.tagName === 'A' && event.target.href && event.target.href.startsWith('http')) {
+        console.log('Triggered custom link opener');
+
+        // Prevent the default behavior (opening the link in the Electron app)
+        event.preventDefault();
+
+        // Open the link in the default external browser
+        window.electronAPI.openInBrowser(event.target.href);
+      }
+    });
+    </script>
+  </head>
+  <body>
+    <h1>💖 Hello World!</h1>
+    <p><a href="https://lace.io" target="_blank">External link</a>.</p>
+  </body>
+</html>
